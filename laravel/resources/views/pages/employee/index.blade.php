@@ -14,9 +14,7 @@
         </div>
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>Companies</h6> 
-                <a href="{{route('companies-create')}}">Create</a>
-                <a href="{{route('companies-excel')}}">Excel</a>
+                <h6>Employees</h6> <a href="{{route('employees-create')}}">Create</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -28,33 +26,32 @@
                                 </th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Create Date</th>
+                                    Company</th>
                                 <th
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($companies as $company)
+                            @forelse ($employees as $employee)
                             <tr>
                                 <td>
                                     <div class="d-flex px-3 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{$company->nama}}</h6>
+                                            <h6 class="mb-0 text-sm">{{$employee->nama}}</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="text-sm font-weight-bold mb-0">{{$company->email}}</p>
+                                    <p class="text-sm font-weight-bold mb-0">{{$employee->email}}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-sm font-weight-bold mb-0">{{$company->website}}</p>
+                                    <p class="text-sm font-weight-bold mb-0">{{$employee->companies->nama}}</p>
                                 </td>
                                 <td class="align-middle text-end">
                                     <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                        <a href="{{url('companies-update?id=' . $company->id)}}" class="text-sm font-weight-bold mb-0">Edit</a>
-                                        <a href="{{url('companies-pdf?id=' . $company->id)}}" class="text-sm font-weight-bold mb-0 ps-2">PDF</a>
-                                        <a href="{{url('companies-delete?id=' . $company->id)}}" class="text-sm font-weight-bold mb-0 ps-2">Delete</a>
+                                        <a href="{{url('employees-update?id=' . $employee->id)}}" class="text-sm font-weight-bold mb-0">Edit</a>
+                                        <a href="{{url('employees-delete?id=' . $employee->id)}}" class="text-sm font-weight-bold mb-0 ps-2">Delete</a>
                                     </div>
                                 </td>
                             </tr>
@@ -71,7 +68,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $companies->links() }}
+                    {{ $employees->links() }}
                 </div>
             </div>
         </div>

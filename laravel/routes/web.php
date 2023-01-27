@@ -25,14 +25,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;     
 use App\Http\Controllers\CompaniesController;       
-          
-
-Route::get('companies', [CompaniesController::class, 'index'])->name('companies-index');
-Route::get('companies-create', [CompaniesController::class, 'create'])->name('companies-create');
-Route::post('companies-create', [CompaniesController::class, 'store'])->name('companies-store');
-Route::get('companies-update', [CompaniesController::class, 'edit'])->name('companies-edit');
-Route::Post('companies-update', [CompaniesController::class, 'update'])->name('companies-update');
-
+use App\Http\Controllers\EmployeesController;
 
 	Route::get('/', function () {
 		return redirect('/dashboard');
@@ -49,6 +42,23 @@ Route::Post('companies-update', [CompaniesController::class, 'update'])->name('c
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::get('companies', [CompaniesController::class, 'index'])->name('companies-index');
+	Route::get('companies-create', [CompaniesController::class, 'create'])->name('companies-create');
+	Route::post('companies-create', [CompaniesController::class, 'store'])->name('companies-store');
+	Route::get('companies-update', [CompaniesController::class, 'edit'])->name('companies-edit');
+	Route::Post('companies-update', [CompaniesController::class, 'update'])->name('companies-update');
+	Route::get('companies-delete', [CompaniesController::class, 'delete'])->name('companies-delete');
+	Route::get('companies-pdf', [CompaniesController::class, 'pdf'])->name('companies-pdf');
+	Route::get('companies-excel', [CompaniesController::class, 'excel'])->name('companies-excel');
+
+	Route::get('employees', [EmployeesController::class, 'index'])->name('employees-index');
+	Route::get('employees-listcomapany', [EmployeesController::class, 'listCompany'])->name('employees-listcomapany');
+	Route::get('employees-create', [EmployeesController::class, 'create'])->name('employees-create');
+	Route::post('employees-create', [EmployeesController::class, 'store'])->name('employees-store');
+	Route::get('employees-update', [EmployeesController::class, 'edit'])->name('employees-edit');
+	Route::post('employees-update', [EmployeesController::class, 'update'])->name('employees-update');
+	Route::get('employees-delete', [EmployeesController::class, 'delete'])->name('employees-delete');
+
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');

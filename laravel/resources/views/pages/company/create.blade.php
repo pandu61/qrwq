@@ -29,8 +29,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Name</label>
-                                    <input class="form-control" type="text" name="name"
-                                        value="{{ old('name') }}">
+                                    <input class="form-control" type="text" name="nama"
+                                        value="{{ old('nama') }}">
                                 </div>
                             </div>  
                             <div class="col-md-12">

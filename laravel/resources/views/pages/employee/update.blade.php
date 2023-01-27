@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-                <form role="form" method="POST" action={{ route('companies-update') }} enctype="multipart/form-data">
+                <form role="form" method="POST" action={{ route('employees-update') }} enctype="multipart/form-data">
                     @csrf
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -17,13 +17,13 @@
                             </ul>
                         </div>
                     @endif
-                    <input type="hidden" name="id" value="{{$company->id}}">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Profile</p>
                             <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
                         </div>
                     </div>
+                    <input type="hidden" name="id" value="{{$employee->id}}">
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Company Information</p>
                         <div class="row">
@@ -31,28 +31,20 @@
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Name</label>
                                     <input class="form-control" type="text" name="nama"
-                                        value="{{ old('name') ?? $company->nama }}">
+                                        value="{{ old('nama') ?? $employee->nama}}">
                                 </div>
                             </div>  
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Email</label>
                                     <input class="form-control" type="email" name="email"
-                                        value="{{ old('email') ?? $company->email }}">
+                                        value="{{ old('email') ?? $employee->email }}">
                                 </div>
                             </div>  
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Website</label>
-                                    <input class="form-control" type="text" name="website"
-                                        value="{{ old('website') ?? $company->website }}">
-                                </div>
-                            </div>    
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Logo</label>
-                                    <input class="form-control" type="file" name="logo"
-                                        value="{{ old('logo') }}">
+                                    <label for="example-text-input" class="form-control-label">Company</label>
+                                    <select name="company"></select>
                                 </div>
                             </div>    
                         </div>
@@ -64,4 +56,28 @@
     </div>
     @include('layouts.footers.auth.footer')
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+var page = 1;
+
+function getCompany() {
+    $.get("{{url('employees-listcomapany')}}?page="+page, function(data, status){
+        $('select[name="company"]').html(data);
+    });
+    
+}
+
+function nextPage() {
+    page++;
+    getCompany();
+}
+
+function previuosPage() {
+    page--;
+    getCompany();
+}
+
+getCompany();
+</script>
 @endsection
